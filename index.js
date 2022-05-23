@@ -25,6 +25,9 @@ class WordleGame {
     });
     this.coloredGuesses.push(coloredGuess);
   }
+  getAnswer() {
+    return this.answer;
+  }
   getColoredGuesses() {
     return this.coloredGuesses;
   }
@@ -65,14 +68,18 @@ async function playGame() {
   });
   newGame.setValidWordsDict(validWordsDict);
   newGame.setAnswer();
-  while (newGame.getGuesses().length < 5) {
+  let foundSolution = false;
+  while (newGame.getGuesses().length < 5 && !foundSolution) {
     const answer = await inquirer.prompt({
       name: "guess",
       type: "input",
       message: "Make a guess",
     });
     const { guess } = answer;
-    if (
+    if (guess === newGame.getAnswer()) {
+      console.log(chalk.green(`nice work. the answer was ${guess}`));
+      foundSolution = true;
+    } else if (
       newGame.getValidWordsDict()[guess.toLowerCase()] &&
       !newGame.getGuesses().includes(guess)
     ) {
