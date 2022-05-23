@@ -15,12 +15,13 @@ class WordleGame {
   addColoredGuess(guess) {
     const answerArr = this.answer.split("");
     const coloredGuess = guess.split("").map((letter, i) => {
-      if (letter === answerArr[i]) {
-        return [letter, "green"];
+      const upperCaseLetter = letter.toUpperCase();
+      if (upperCaseLetter === answerArr[i]) {
+        return [upperCaseLetter, "green"];
       } else if (answerArr.includes(letter)) {
-        return [letter, "yellow"];
+        return [upperCaseLetter, "yellow"];
       }
-      return [letter, "grey"];
+      return [upperCaseLetter, "grey"];
     });
     this.coloredGuesses.push(coloredGuess);
   }
@@ -92,6 +93,7 @@ async function playGame() {
           return str + element[0];
         }
       }, "");
+      console.log(line);
     });
   }
 }
