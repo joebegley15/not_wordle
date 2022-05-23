@@ -12,7 +12,7 @@ class WordleGame {
     this.validWords = [];
     this.validWordsDict = {};
   }
-  configureGuess(guess) {
+  addColoredGuess(guess) {
     const answerArr = this.answer.split("");
     const coloredGuess = guess.split("").map((letter, i) => {
       if (letter === answerArr[i]) {
@@ -75,7 +75,7 @@ async function playGame() {
       newGame.getValidWordsDict()[guess.toLowerCase()] &&
       !newGame.getGuesses().includes(guess)
     ) {
-      newGame.configureGuess(guess);
+      newGame.addColoredGuess(guess);
       newGame.setGuess(guess.toLowerCase());
     } else if (guess.length !== 5) {
       console.log(chalk.red("Word should be five letters long."));
