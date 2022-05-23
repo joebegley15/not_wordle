@@ -24,6 +24,9 @@ class WordleGame {
     });
     this.coloredGuesses.push(coloredGuess);
   }
+  getColoredGuesses() {
+    return this.coloredGuesses;
+  }
   getGuesses() {
     return this.guesses;
   }
@@ -79,7 +82,17 @@ async function playGame() {
     } else {
       console.log(chalk.red("invalid word. please try again."));
     }
-    console.log(newGame.getGuesses());
+    newGame.getColoredGuesses().forEach((guess) => {
+      const line = guess.reduce((str, element) => {
+        if (element[1] === "yellow") {
+          return str + chalk.yellow(element[0]);
+        } else if (element[1] === "green") {
+          return str + chalk.green(element[0]);
+        } else {
+          return str + element[0];
+        }
+      }, "");
+    });
   }
 }
 
