@@ -103,6 +103,9 @@ async function playGame() {
       console.log(line);
     });
   }
+  if (!foundSolution) {
+    console.log(chalk.red(`You're all out of guesses, the correct word was ${newGame.getAnswer()}`))
+  }
 }
 
 playGame();
