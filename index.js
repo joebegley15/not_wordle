@@ -13,7 +13,9 @@ class WordleGame {
     this.validWordsDict = {};
   }
   addColoredGuess(guess) {
-    const answerArr = this.answer.split("");
+    const answerArr = this.answer
+      .split("")
+      .map((letter) => letter.toUpperCase());
     const coloredGuess = guess.split("").map((letter, i) => {
       const upperCaseLetter = letter.toUpperCase();
       if (upperCaseLetter === answerArr[i]) {
@@ -104,7 +106,11 @@ async function playGame() {
     });
   }
   if (!foundSolution) {
-    console.log(chalk.red(`You're all out of guesses, the correct word was ${newGame.getAnswer()}`))
+    console.log(
+      chalk.red(
+        `You're all out of guesses, the correct word was ${newGame.getAnswer()}`
+      )
+    );
   }
 }
 
