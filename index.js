@@ -20,7 +20,7 @@ class WordleGame {
       const upperCaseLetter = letter.toUpperCase();
       if (upperCaseLetter === answerArr[i]) {
         return [upperCaseLetter, "green"];
-      } else if (answerArr.includes(letter)) {
+      } else if (answerArr.includes(upperCaseLetter)) {
         return [upperCaseLetter, "yellow"];
       }
       return [upperCaseLetter, "grey"];
@@ -52,8 +52,13 @@ class WordleGame {
     this.validWordsDict = words;
   }
   setAnswer() {
+    /*
+      These words get less common the further you push into the list.
+      We divide the random number by two, so that the answer selected is a word like 'bones' and not 'klieg'.
+      You can still use any of these as an input.
+    */
     this.answer =
-      this.validWords[Math.floor(Math.random() * this.validWords.length)];
+      this.validWords[Math.floor((Math.random() * this.validWords.length) / 2)];
   }
   setGuess(guess) {
     this.guesses.push(guess);
